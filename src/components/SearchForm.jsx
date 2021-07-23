@@ -7,6 +7,7 @@ class SearchForm extends Component {
         this.state = {
             username: '',
             users: [],
+            userFound: false
         }
     }
 
@@ -15,11 +16,13 @@ class SearchForm extends Component {
         const response = await fetch(`https://api.github.com/users/${this.state.username}`)
             .then(response => response.json())
         const newUserDate = response
-        // in the future add an isvalid state to return a message if no users are found. 
-        this.setState({
-            users: [...this.state.users, newUserDate]
-        })
 
+        if (response.login !== undefined && this.state.users.includes(this.state.username) === false) {
+            this.setState({
+                users: [...this.state.users, newUserDate],
+                userFound: true
+            })
+        }
     }
 
     _handleChange = (event) => {
@@ -30,14 +33,15 @@ class SearchForm extends Component {
 
 
     render() {
-        const { users } = this.state;
-        const userCard = users.map((user, index) => {
+        const { users, userFound } = this.state;
+        const userCard = users.map((user, index, userFound) => {
             return (
                 <UserCard
                     key={index}
                     login={user.login}
                     avatar_url={user.avatar_url}
                     bio={user.bio}
+                    userFound={userFound}
                 />
             )
         })
@@ -49,10 +53,10 @@ class SearchForm extends Component {
                             placeholder="Enter the Username of a Programmer" name="username"
                             value={this.state.value}
                             onChange={this._handleChange} />
+                        <button type="submit">Add to Team</button>
                     </form>
-                    <button type="submit">Add to Team</button>
                     <div className="UserCards">
-                        {userCard}
+                        {!!userFound ? userCard : ''}
                     </div>
 
                 </div>
