@@ -1,24 +1,17 @@
-import logo from './logo.svg';
+import SearchForm from './components/SearchForm'
 import './App.css';
 
 function App() {
   return (
+    <>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="mainContainer">
+        <h1>Fantasy Github</h1>
+        <p>Build your fantasy Github programming team. Who will be the first team to create the next Google?</p>
+      <SearchForm />
+      </div>
     </div>
+    </>
   );
 }
 
