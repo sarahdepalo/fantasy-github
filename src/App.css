@@ -41,7 +41,7 @@ input {
 
 /*button styles */
 
-button {
+button, a {
   padding: 10px 10px;
   border-radius: 15px;
   border: none;

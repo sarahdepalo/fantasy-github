@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import UserCard from './UserCard'
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import UserCard from './UserCard';
+import UserProfile from './UserProfile';
 
 class SearchForm extends Component {
     constructor(props) {
@@ -34,20 +36,22 @@ class SearchForm extends Component {
 
     render() {
         const { users, userFound } = this.state;
-        const userCard = users.map((user, index, userFound) => {
+        const userCard = users.map((user, index) => {
             return (
-                <UserCard
-                    key={index}
-                    login={user.login}
-                    avatar_url={user.avatar_url}
-                    bio={user.bio}
-                    userFound={userFound}
-                />
+                <>
+                    <UserCard
+                        key={index}
+                        login={user.login}
+                        avatar_url={user.avatar_url}
+                        bio={user.bio}
+                        userFound={this.state.userFound}
+                    />
+                </>
             )
         })
         return (
             <>
-                <div>
+                <Route exact path="/">
                     <form onSubmit={this._handleSubmit}>
                         <input type="text"
                             placeholder="Enter the Username of a Programmer" name="username"
@@ -59,7 +63,12 @@ class SearchForm extends Component {
                         {!!userFound ? userCard : ''}
                     </div>
 
-                </div>
+                </Route>
+                <Route path = "/user/:username">
+                    <UserProfile 
+                    users={this.state.users}
+                    />
+                </Route>
             </>
         )
     }
