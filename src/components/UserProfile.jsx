@@ -11,11 +11,11 @@ const UserProfile = (props) => {
         <>
             <div className="card">
                 <h1>User Profile</h1>
-                <img src={user.avatar_url} />
+                <img src={user.avatar_url} alt="github user avatar"/>
                 <h2>{user.login}</h2>
                 <p>{user.bio}</p>
                 <p>Followers: {user.followers}</p>
-                <a href={user.html_url} target="_blank">Respository</a>
+                <a href={user.html_url}>Respository</a>
             </div>
         </>
     )
