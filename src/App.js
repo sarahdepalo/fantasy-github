@@ -1,10 +1,11 @@
 import SearchForm from './components/SearchForm'
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import './App.css';
 
 function App() {
   return (
     <Router>
+      <Switch>
       <div className="App">
         <div className="mainContainer">
           <h1>Fantasy Github</h1>
@@ -13,6 +14,7 @@ function App() {
  
         </div>
       </div>
+      </Switch>
     </Router>
   );
 }
